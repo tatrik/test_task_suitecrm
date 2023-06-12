@@ -1,4 +1,5 @@
 import uvicorn
+import os
 from fastapi import FastAPI
 
 from app.api import router
@@ -12,6 +13,6 @@ if __name__ == '__main__':
     uvicorn.run(
         "main:app",
         port=8000,
-        host="localhost",
+        host=os.environ["SERVER_HOST"],
         reload=True,
     )

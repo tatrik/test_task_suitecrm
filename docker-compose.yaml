@@ -1,0 +1,36 @@
+version: "3.9"
+
+networks:
+  custom:
+
+volumes:
+  db:
+
+services:
+
+  db:
+    container_name: "db"
+    image: mysql:8.0
+    volumes:
+      - "db:/var/lib/mysql/data"
+    restart: "always"
+    env_file:
+      - .env
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+    networks:
+      custom:
+
+  web:
+    build: .
+    command: python main.py
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - custom

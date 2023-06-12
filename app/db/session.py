@@ -1,9 +1,10 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from typing import Generator
 
 
-DATABASE_URL = "mysql+mysqlconnector://root:password@0.0.0.0/demo"
+DATABASE_URL = os.environ["DATABASE_URL"]
 
 
 engine = create_engine(DATABASE_URL)
